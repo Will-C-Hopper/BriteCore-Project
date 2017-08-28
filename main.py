@@ -32,6 +32,7 @@ def login():
     result = query.first()
     if result:
         session['logged_in'] = True
+        resp.set_cookie('username', POST_USERNAME )
     else:
         flash('Incorrect Credentials')
     return home()
@@ -39,6 +40,7 @@ def login():
 
 @app.route('/logout')
 def logout():
+    resp.set_cookie('username', 'logged out' )
     session['logged_in'] = False
     return index()
 
